@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__)
-# Usamos una clave secreta para firmar las cookies de sesión
+# Uso una clave secreta para firmar las cookies de sesión
 app.secret_key = "secreto_super_seguro_pfo2"
 
 DATABASE = "database.db"
@@ -31,7 +31,7 @@ def registro():
     usuario = datos['usuario']
     contrasena = datos['contraseña']
     
-    # Hasheamos la contraseña
+    # Hashear la contraseña
     contrasena_hash = generate_password_hash(contrasena)
 
     try:
@@ -60,7 +60,7 @@ def login():
         resultado = cursor.fetchone()
 
     if resultado and check_password_hash(resultado[0], contrasena):
-        # Guardamos el usuario en la sesión para que pueda acceder a /tareas
+        # Guardo el usuario en la sesión para que pueda acceder a /tareas
         session['usuario'] = usuario
         return jsonify({"mensaje": "Inicio de sesión exitoso"}), 200
     else:
@@ -68,7 +68,7 @@ def login():
 
 @app.route('/tareas', methods=['GET'])
 def tareas():
-    # Verificamos si el usuario tiene una sesión activa
+    # Verifico si el usuario tiene una sesión activa
     if 'usuario' not in session:
         return jsonify({"error": "No autorizado. Por favor inicie sesión."}), 401
     
@@ -106,7 +106,7 @@ def tareas():
     return render_template_string(html)
 
 if __name__ == '__main__':
-    # Inicializamos la base de datos al arrancar
+    # Inicializo la base de datos al arrancar
     init_db()
-    # Ejecutamos el servidor
+    # Ejecutar el servidor
     app.run(debug=True, port=5000)

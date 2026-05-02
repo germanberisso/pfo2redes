@@ -1,10 +1,10 @@
 import requests
 import sys
 
-# URL base de nuestra API Flask
+# URL base de API Flask
 BASE_URL = 'http://127.0.0.1:5000'
 
-# Usamos una sesión de requests para mantener las cookies entre peticiones (para la autenticación)
+# Uso una sesión de requests para mantener las cookies entre peticiones (para la autenticación)
 sesion = requests.Session()
 
 def mostrar_menu():
@@ -29,11 +29,11 @@ def registrarse():
         respuesta = requests.post(url, json=datos)
         datos_resp = respuesta.json()
         if respuesta.status_code == 201:
-            print(f"✅ Éxito: {datos_resp['mensaje']}")
+            print(f"Éxito: {datos_resp['mensaje']}")
         else:
-            print(f"❌ Error: {datos_resp.get('error', 'Error desconocido')}")
+            print(f"Error: {datos_resp.get('error', 'Error desconocido')}")
     except requests.exceptions.ConnectionError:
-        print("❌ Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
+        print("Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
 
 def iniciar_sesion():
     print("\n--- Inicio de Sesión ---")
@@ -48,31 +48,31 @@ def iniciar_sesion():
         respuesta = sesion.post(url, json=datos)
         datos_resp = respuesta.json()
         if respuesta.status_code == 200:
-            print(f"✅ Éxito: {datos_resp['mensaje']}")
+            print(f"Éxito: {datos_resp['mensaje']}")
         else:
-            print(f"❌ Error: {datos_resp.get('error', 'Error desconocido')}")
+            print(f"Error: {datos_resp.get('error', 'Error desconocido')}")
     except requests.exceptions.ConnectionError:
-        print("❌ Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
+        print("Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
 
 def ver_tareas():
     print("\n--- Mis Tareas ---")
     url = f"{BASE_URL}/tareas"
     
     try:
-        # Usamos la misma sesión; si hicimos login exitoso, enviará la cookie automáticamente
+        # Uso la misma sesión; si hay login exitoso, enviará la cookie automáticamente
         respuesta = sesion.get(url)
         if respuesta.status_code == 200:
-            print("✅ Conexión autorizada. Se obtuvo el HTML de tareas:")
+            print("Conexión autorizada. Se obtuvo el HTML de tareas:")
             print("-" * 40)
             print(respuesta.text)
             print("-" * 40)
         elif respuesta.status_code == 401:
             datos_resp = respuesta.json()
-            print(f"🔒 Acceso denegado: {datos_resp.get('error', 'No autorizado')}")
+            print(f" Acceso denegado: {datos_resp.get('error', 'No autorizado')}")
         else:
-            print(f"❌ Error inesperado: código {respuesta.status_code}")
+            print(f"Error inesperado: código {respuesta.status_code}")
     except requests.exceptions.ConnectionError:
-        print("❌ Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
+        print("Error: No se pudo conectar con el servidor. ¿Está ejecutándose servidor.py?")
 
 def main():
     while True:
