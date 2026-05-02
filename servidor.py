@@ -95,9 +95,9 @@ def tareas():
             <h1>Bienvenido a tus tareas, {usuario}</h1>
             <p>Aquí tienes tu lista de cosas por hacer:</p>
             <ul>
-                <li>Terminar la API Flask 🚀</li>
-                <li>Hacer la documentación 📝</li>
-                <li>Aprobar la materia 🎉</li>
+                <li>Terminar la API Flask </li>
+                <li>Hacer la documentación </li>
+                <li>Aprobar la materia </li>
             </ul>
         </div>
     </body>
