@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Entorno virtual
+venv/
+.env
+
+# Base de datos
+database.db
+
+# Config sensibles
+.env
